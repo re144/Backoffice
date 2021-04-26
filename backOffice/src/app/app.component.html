@@ -1,0 +1,66 @@
+
+
+<mat-toolbar color="primary">
+  <app-nav></app-nav>
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="Onopen()" [disabled]="!login">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span *ngIf="login"> BackOffice</span>
+    <h3 routerLinkActive="active" *ngIf="!login"> <a routerLink="login"><span style="color: #FFFFFF " > Authentification</span></a></h3>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+      <ul fxLayout="row" fxLayoutGap="20px">
+        <li  routerLinkActive="active" *ngIf="role&&login">
+          <button mat-icon-button>
+            <mat-icon routerLink="/gestion-des-admins" >settings</mat-icon>
+          </button>
+        </li>
+        <li>
+          <button mat-icon-button>
+            <mat-icon>help_outline</mat-icon>
+          </button>
+        </li>
+        <li>
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>person_outline</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" >
+            <button mat-menu-item (click)="logout()" [disabled]="!login">
+              <mat-icon>exit_to_app</mat-icon>
+              Sign out
+            </button>
+          </mat-menu>
+
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="open">
+    <mat-nav-list>
+
+      <mat-divider>awd</mat-divider>
+
+      <h2 matSubheader>Pages</h2>
+
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/gestion-des-clients"><mat-icon>perm_contact_calendar</mat-icon>&nbsp;	Clients</a>
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/commerciaux"> <mat-icon>contact_phone</mat-icon> &nbsp;	Commerciaux</a>
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/commandes"><mat-icon>receipt</mat-icon>&nbsp;	Commandes</a>
+
+      <mat-divider></mat-divider>
+
+
+
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
